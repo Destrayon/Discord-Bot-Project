@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "BotProject": {
+      "commandName": "Project",
+      "commandLineArgs": "--environment Development",
+      "sqlDebugging": true
+    },
+    "WSL 2": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}
