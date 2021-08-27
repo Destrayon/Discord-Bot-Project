@@ -19,9 +19,15 @@ namespace BotProject.Tests
         {
             IHostBuilder builder = Program.CreateHostBuilder(null);
 
-            Singleton singleton = builder.Build().Services.GetService<BotLogin>();
+            IHost host = builder.Build();
+
+            Singleton singleton = host.Services.GetService<BotLogin>();
 
             Assert.IsNotNull(singleton);
+
+            Program program = host.Services.GetService<Program>();
+
+            Assert.IsNull(program);
         }
     }
 }
