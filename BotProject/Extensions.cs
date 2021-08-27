@@ -16,7 +16,21 @@ namespace BotProject
         {
             IEnumerable<Type> types = Assembly.GetExecutingAssembly()
                                               .GetTypes()
-                                              .Where(x => x.BaseType == typeof(Singleton) && !x.IsAbstract);
+                                              .Where((x) => 
+                                              {
+                                                  if (x.IsAbstract) return false;
+
+                                                  var type = x.BaseType;
+
+                                                  while (type is not null)
+                                                  {
+                                                      if (type.Equals(typeof(Singleton))) return true;
+
+                                                      type = type.BaseType;
+                                                  }
+
+                                                  return false;
+                                              });
 
             builder.ConfigureServices(services =>
             {

@@ -17,8 +17,7 @@ namespace BotProject.Tests
         [TestMethod()]
         public void AddSingletonClassesTest_ChecksForBotLoginSingleton_ReturnsTrueIfExists()
         {
-            IHostBuilder builder = Host.CreateDefaultBuilder(null)
-                                       .AddSingletonClasses();
+            IHostBuilder builder = Program.CreateHostBuilder(null);
 
             Singleton singleton = builder.Build().Services.GetService<BotLogin>();
 
