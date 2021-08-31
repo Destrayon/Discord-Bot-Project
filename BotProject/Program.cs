@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Discord.WebSocket;
+using Discord.Commands;
+using BotProject.Modules;
 
 namespace BotProject
 {
@@ -20,12 +23,9 @@ namespace BotProject
                 .ConfigureServices(services =>
                 {
                     services.AddHostedService<Startup>();
-                    services.AddSingleton(service =>
-                    {
-                        HttpClient client = new();
-                        client.BaseAddress = new Uri("https://discordapp.com");
-                        return client;
-                    });
+                    services.AddSingleton<DiscordSocketClient>();
+                    services.AddSingleton<CommandService>();
+                    services.AddSingleton<Commands>();
                 })
                 .ConfigureHostConfiguration(host =>
                 {
@@ -33,6 +33,5 @@ namespace BotProject
                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
                 })
                 .AddSingletonClasses();
-                
     }
 }

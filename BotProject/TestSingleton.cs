@@ -1,13 +1,13 @@
-﻿using System;
+﻿using BotProject.Inheritance;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BotProject.Inheritance
+namespace BotProject
 {
-    interface INetworkBuilder
+    public class TestSingleton : Singleton
     {
-        void Build();
     }
 }
