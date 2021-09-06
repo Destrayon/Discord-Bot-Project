@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Discord.WebSocket;
 using Discord.Commands;
 using BotProject.Modules;
+using BotProject.Extensions;
 
 namespace BotProject
 {
@@ -17,7 +18,7 @@ namespace BotProject
         {
             await CreateHostBuilder(args).RunConsoleAsync();
         }
-
+        
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
@@ -27,10 +28,11 @@ namespace BotProject
                     services.AddSingleton<CommandService>();
                     services.AddSingleton<Commands>();
                 })
-                .ConfigureHostConfiguration(host =>
+                .ConfigureAppConfiguration((context, host) =>
                 {
                     host.SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}", optional: true);
                 })
                 .AddSingletonClasses();
     }

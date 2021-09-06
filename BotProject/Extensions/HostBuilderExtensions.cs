@@ -8,9 +8,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BotProject
+namespace BotProject.Extensions
 {
-    public static class Extensions
+    public static class HostBuilderExtensions
     {
         public static IHostBuilder AddSingletonClasses(this IHostBuilder builder)
         {
